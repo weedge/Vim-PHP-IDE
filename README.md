@@ -72,13 +72,14 @@ below. Feel free to open as many buffers as you want, as if this were a normal I
 
 Run these commands in your terminal to fully install this vim setup within OS X. It will probably require some
 tweaking to get it working under Linux.
+（可以通过git子模块来管理插件-相关操作参考点[这里](http://josephj.com/entry.php?id=342)）
 
     cd ~
     git clone git://github.com/tlhunter/Vim-PHP-IDE.git .vim
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/gvimrc ~/.gvimrc
     cd ~/.vim
-    git submodule init（可以通过git子模块来管理插件-相关操作参考点[这里](http://josephj.com/entry.php?id=342)）
+    git submodule init
     git submodule update
     cd ~/.vim/bundle/command-t/
     rake make
