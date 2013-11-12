@@ -1,3 +1,6 @@
+## 修改
+去掉了两个插件的git子模块 tlib_vim、vim-addon-mw-utils (全部使用vundle来通过git子模块管理比较慢)
+
 # Thomas Hunter's VIM Configuration
 
 This Vim configuration is meant to be used to make Vim act more like an IDE. I use it mostly under MacVIM,
@@ -75,7 +78,7 @@ tweaking to get it working under Linux.
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/gvimrc ~/.gvimrc
     cd ~/.vim
-    git submodule init
+    git submodule init（可以通过git子模块来管理插件-相关操作参考点[这里](http://josephj.com/entry.php?id=342)）
     git submodule update
     cd ~/.vim/bundle/command-t/
     rake make
@@ -84,5 +87,3 @@ tweaking to get it working under Linux.
 
 ![Screenshot](http://thomashunter.name/pictures/macvim.png "Screenshot of MacVIM")
 
-## 修改
-去掉了两个插件的git子模块 tlib_vim、vim-addon-mw-utils (全部使用vundle来通过git子模块管理比较慢)
