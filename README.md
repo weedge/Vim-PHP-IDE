@@ -83,3 +83,6 @@ tweaking to get it working under Linux.
 ## Screenshots
 
 ![Screenshot](http://thomashunter.name/pictures/macvim.png "Screenshot of MacVIM")
+
+## 修改
+去掉了两个插件的git子模块 tlib_vim、vim-addon-mw-utils (全部使用vundle来通过git子模块管理比较慢)
