@@ -1,8 +1,27 @@
 call pathogen#infect()      "Executes the pathogen plugin, which loads other plugins
 let mapleader=","           "Changes Leader key into a comma instead of a backslash
+let maplocalleader='\'      "Changes the maplocalleader
 set nocompatible            "Prefents VIM from being nerfed into acting like VI
 set viminfo='1000,f1,:1000,/1000
 set history=500
+
+" Source the vimrc file after saving it
+autocmd BufWritePost .vimrc source $MYVIMRC
+" Fast edit the .vimrc file using ',x'
+nnoremap <Leader>x :tabedit $MYVIMRC<CR>
+
+set autoread " Set autoread when a file is changed outside
+set autowrite " Write on make/shell commands
+
+"set clipboard+=unnamed " Yanks go on clipboard instead
+"set spell " Spell checking on
+set modeline " Turn on modeline
+set encoding=utf-8 " Set utf-8 encoding
+set completeopt+=longest " Optimize auto complete
+set completeopt-=preview " Optimize auto complete
+
+set backup " Set backup
+set undofile " Set undo
 
 au FileType php set omnifunc=phpcomplete#CompletePHP
 
@@ -10,7 +29,7 @@ au FileType php set omnifunc=phpcomplete#CompletePHP
 set guioptions=egmt         "remove toolbar, scrollbars
 syntax on                   "Enables syntax highlighting
 set nu                      "Enable Line Numbers
-set nowrap                  "Disable word wrap
+set wrap                  	"Enable word wrap
 set vb                      "Visual bell instead of beeps
 set ruler                   "Displays cursor position on bottom right of screen
 set statusline=%<%f\ %h%m%r%=%{fugitive#statusline()}\ \ %-14.(%l,%c%V%)\ %P
@@ -24,6 +43,7 @@ set hidden                  "Switch between unsaved buffers w/o needing to save,
 filetype indent on          "Syntax Highlight
 filetype plugin on          "Needed for snipMate
 set autoindent              "Autoindent
+set cursorline                  "Highlight background of current line
 "set expandtab               "Use spaces instead of tabs
 "Ignore these files when completing names
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,node_modules/*
@@ -63,7 +83,7 @@ autocmd FileType nerdtree noremap <buffer> <c-l> <nop>
 "------  Tagbar Options  ------
 " http://adamyoung.net/Exuberant-Ctags-OS-X
 " http://www.vim.org/scripts/script.php?script_id=273
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:tagbar_width=26
 noremap <silent> <Leader>y :TagbarToggle<CR>
 
@@ -118,7 +138,7 @@ nmap <silent> <Leader>es :so $MYVIMRC<CR>
 " When pressing <leader>cd switch to the directory of the open buffer
 "map <Leader>cd :cd %:p:h<CR>
 " ,ct = Builds ctags
-map <Leader>ct :! /usr/local/bin/ctags -R *<CR>
+map <Leader>ct :! /usr/bin/ctags -R *<CR>
 
 " ,v = Paste
 map <Leader>v "+gP
@@ -143,6 +163,131 @@ map <Leader>L :set invnumber<CR>
 " autocmd BufWritePre * :%s/\s\+$//e
 
 map <Leader>? :Helptags<CR>
+
+" Markdown
+augroup ft_markdown
+	autocmd!
+	" Use <localLeader>1/2/3/4/5/6 to add headings
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>1 I# <ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>2 I## <ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>3 I### <ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>4 I#### <ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>5 I##### <ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>6 I###### <ESC>
+	" Use <LocalLeader>b to add blockquotes in normal and visual mode
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>b I> <ESC>
+	autocmd Filetype markdown vnoremap <buffer> <localLeader>b :s/^/> /<CR>
+	" Use <localLeader>ul and <localLeader>ol to add list symbols in visual mode
+	autocmd Filetype markdown vnoremap <buffer> <localLeader>ul :s/^/* /<CR>
+	autocmd Filetype markdown vnoremap <buffer> <LocalLeader>ol :s/^/\=(line(".")-line("'<")+1).'.  '/<CR>
+	" Use <localLeader>e1/2/3 to add emphasis symbols
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>e1 I*<ESC>A*<ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>e2 I**<ESC>A**<ESC>
+	autocmd Filetype markdown nnoremap <buffer> <localLeader>e3 I***<ESC>A***<ESC>
+	" Use <Leader>P to preview markdown file in browser
+	autocmd Filetype markdown nnoremap <buffer> <Leader>P :MarkdownPreview<CR>
+augroup END
+
+" JSON
+augroup ft_json
+	autocmd!
+	" Disable concealing of double quotes
+	autocmd filetype json setlocal conceallevel=0
+	" Added folding of {...} and [...] blocks
+	autocmd filetype json setlocal foldmethod=syntax
+augroup END
+
+" LESS
+augroup ft_less
+	autocmd!
+	autocmd filetype less nnoremap <buffer> <Leader>r :w <BAR> !lessc % > %:t:r.css<CR><Space>
+augroup END
+
+" PHP
+augroup ft_php
+	if filereadable(expand("$HOME/.vim/dict/php_funclist.txt"))
+		function! AddPHPFuncList() " Inspired by hawk
+			(https://github.com/hawklim)
+			set dictionary-=$HOME/.vim/dict/php_funclist.txt
+			dictionary+=$HOME/.vim/dict/php_funclist.txt
+			set complete-=k complete+=k
+		endfunction
+		autocmd!
+		autocmd filetype php call AddPHPFuncList()
+	endif
+augroup END
+
+" Perl
+augroup ft_perl
+	let perl_include_pod=1
+	let perl_extended_vars=1
+	let perl_sync_dist=250
+	autocmd!
+	autocmd filetype perl setlocal keywordprg=perldoc\ -f
+augroup END
+
+" Python
+augroup ft_python
+	" Indent Python in the Google way.
+	let s:maxoff = 50 " maximum number of lines to look backwards.
+	function! GetGooglePythonIndent(lnum)
+		" Indent inside parens.
+		" Align with the open paren unless it is at the end of the line.
+		" E.g.
+		" open_paren_not_at_EOL(100,
+		" (200,
+		" 300),
+		" 400)
+		" open_paren_at_EOL(
+		" 100, 200, 300, 400)
+		call cursor(a:lnum, 1)
+		let [par_line, par_col] = searchpairpos('(\|{\|\[', '', ')\|}\|\]', 'bW',
+					\ "line('.') < " . (a:lnum - s:maxoff) . " ? dummy :"
+					\ . " synIDattr(synID(line('.'), col('.'), 1), 'name')"
+					\ .  " =~ '\\(Comment\\|String\\)$'")
+		if par_line > 0
+			call cursor(par_line, 1)
+			if par_col != col("$") - 1
+				return par_col
+			endif
+		endif
+		" Delegate the rest to the original function.
+		return GetPythonIndent(a:lnum)
+	endfunction
+
+	function!  ChoosePythonCompiler()
+		echo "Please choose python compiler:\n"
+		echo "1.  Python2+\n"
+		echo "2.  Python3+\n"
+		let flag=getchar()
+		if flag==49
+			call SingleCompile#ChooseCompiler('python', 'python')
+			execute 'SingleCompileRun'
+		elseif flag==50
+			call SingleCompile#ChooseCompiler('python', 'python3')
+			execute 'SingleCompileRun'
+		endif
+	endfunction
+
+	let pyindent_nested_paren="&sw*2"
+	let pyindent_open_paren="&sw*2"
+
+	autocmd!
+	autocmd filetype python setlocal indentexpr=GetGooglePythonIndent(v:lnum)
+	autocmd filetype python nnoremap <buffer> <Leader>r :call ChoosePythonCompiler()<CR>
+
+augroup END
+
+
+" Ruby
+augroup ft_ruby
+	autocmd!
+	autocmd filetype ruby setlocal shiftwidth=2 softtabstop=2
+augroup END
+
+nnoremap <silent>\t :colorscheme Tomorrow-Night-Eighties<CR>
+nnoremap <silent>\j :colorscheme jellybeans<CR>
+nnoremap <silent>\h :colorscheme hybrid<CR>
 
 if has("gui_running")
     set cursorline                  "Highlight background of current line
