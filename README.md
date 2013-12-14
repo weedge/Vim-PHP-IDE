@@ -75,7 +75,7 @@ tweaking to get it working under Linux.
 （可以通过git子模块来管理插件-相关操作参考点[这里](http://josephj.com/entry.php?id=342)）
 
     cd ~
-    git clone git://github.com/tlhunter/Vim-PHP-IDE.git .vim
+    git clone git://github.com/weedge/Vim-PHP-IDE.git .vim
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/gvimrc ~/.gvimrc
     cd ~/.vim
