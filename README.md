@@ -64,7 +64,7 @@ below. Feel free to open as many buffers as you want, as if this were a normal I
 * Use _s_ to reorder the items by alpha or occurance
 
 ### php documentor (php-doc)
-* 使用Ctrl p生成注释文档from:http://www.vim.org/scripts/script.php?script_id=1355 对此进行了一些修改,木有放git submoudle里头管理了
+* 使用Ctrl p生成注释文档from:http://www.vim.org/scripts/script.php?script_id=1355 对此进行了一些修改,木有放git submodule里头管理了
 
 
 ## Requirements
