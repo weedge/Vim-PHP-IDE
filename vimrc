@@ -16,12 +16,14 @@ set autowrite " Write on make/shell commands
 "set clipboard+=unnamed " Yanks go on clipboard instead
 "set spell " Spell checking on
 set modeline " Turn on modeline
-set encoding=utf-8 " Set utf-8 encoding
+set encoding=utf8 " Set utf-8 encoding
+set termencoding=utf8
+set fencs=utf8,gbk,gb2312,gb18030,cp936 
 set completeopt+=longest " Optimize auto complete
 set completeopt-=preview " Optimize auto complete
 
 set backup " Set backup
-set undofile " Set undo
+"set undofile " Set undo
 
 au FileType php set omnifunc=phpcomplete#CompletePHP
 
@@ -44,6 +46,7 @@ filetype indent on          "Syntax Highlight
 filetype plugin on          "Needed for snipMate
 set autoindent              "Autoindent
 set cursorline                  "Highlight background of current line
+nnoremap <Leader>vv :set mouse=v<CR>
 "set expandtab               "Use spaces instead of tabs
 "Ignore these files when completing names
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,node_modules/*
@@ -204,12 +207,19 @@ augroup ft_less
 augroup END
 
 " PHP
+set runtimepath+=$HOME/.vim/php
+autocmd BufNewFile,Bufread *.ros,*.inc,*.php set keywordprg="help"
 augroup ft_php
+
+	" phpdocumentor
+	source $HOME/.vim/bundle/phpdocumentor/php-doc.vim 
+	inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
+	nnoremap <C-P> :call PhpDocSingle()<CR> 
+	vnoremap <C-P> :call PhpDocRange()<CR> 
+
 	if filereadable(expand("$HOME/.vim/dict/php_funclist.txt"))
-		function! AddPHPFuncList() " Inspired by hawk
-			(https://github.com/hawklim)
-			set dictionary-=$HOME/.vim/dict/php_funclist.txt
-			dictionary+=$HOME/.vim/dict/php_funclist.txt
+		function! AddPHPFuncList() " Inspired by hawk (https://github.com/hawklim)
+			set dictionary-=$HOME/.vim/dict/php_funclist.txt dictionary+=$HOME/.vim/dict/php_funclist.txt
 			set complete-=k complete+=k
 		endfunction
 		autocmd!
@@ -285,9 +295,9 @@ augroup ft_ruby
 	autocmd filetype ruby setlocal shiftwidth=2 softtabstop=2
 augroup END
 
-nnoremap <silent>\t :colorscheme Tomorrow-Night-Eighties<CR>
+nnoremap <silent>\d :colorscheme desert<CR>
 nnoremap <silent>\j :colorscheme jellybeans<CR>
-nnoremap <silent>\h :colorscheme hybrid<CR>
+nnoremap <silent>\b :colorscheme darkblue<CR>
 
 if has("gui_running")
     set cursorline                  "Highlight background of current line
@@ -320,3 +330,22 @@ endif
 if filereadable($HOME.'/.vimrc_local')
     source $HOME/.vimrc_local
 endif
+
+" 插入时间
+imap <silent> <C-D><C-D> <C-R>=strftime("%Y-%b-%e")<CR>
+imap <silent> <C-T><C-T> <C-R>=strftime("%l:%M %p")<CR>
+
+let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions']
+let g:startify_custom_header = [
+            \"       ./\   _                  ",
+            \"  c ..'D> `'//...........'`.    ",
+            \"  :        //            :`     ",
+            \"  :       //             :      ",
+            \"  '..... //    dog-vim   :      ",
+            \"   ^^^^^``:              ;      ",
+            \"          :             .'      ",
+            \"          : :':'''''':`: `. jgs ",
+            \"          ''''``      ``'''     ",
+            \]
+
+let g:startify_custom_footer = "   This configuration is maintained by Xiao-Ou Zhang(kepbod@gmail.com) and other contributors. Thanks!"

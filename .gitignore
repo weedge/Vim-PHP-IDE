@@ -1,2 +1,5 @@
 sessions/*
 .netrwhist
+.vimrc
+*~
+*.swp
