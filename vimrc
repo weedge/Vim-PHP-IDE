@@ -298,6 +298,9 @@ augroup END
 nnoremap <silent>\d :colorscheme desert<CR>
 nnoremap <silent>\j :colorscheme jellybeans<CR>
 nnoremap <silent>\b :colorscheme darkblue<CR>
+nnoremap <silent>\m :colorscheme Mustang<CR>
+nnoremap <silent>\s :colorscheme solarized<CR>
+nnoremap <silent>\i :colorscheme ir_black<CR>
 
 if has("gui_running")
     set cursorline                  "Highlight background of current line
@@ -341,11 +344,11 @@ let g:startify_custom_header = [
             \"  c ..'D> `'//...........'`.    ",
             \"  :        //            :`     ",
             \"  :       //             :      ",
-            \"  '..... //    dog-vim   :      ",
+            \"  '..... // mini-dog-vim :      ",
             \"   ^^^^^``:              ;      ",
             \"          :             .'      ",
             \"          : :':'''''':`: `. jgs ",
             \"          ''''``      ``'''     ",
             \]
 
-let g:startify_custom_footer = "   This configuration is maintained by Xiao-Ou Zhang(kepbod@gmail.com) and other contributors. Thanks!"
+let g:startify_custom_footer = "   This configuration is maintained by wuyong(wuyong@sogou-inc.com) and other contributors. Thanks!"
