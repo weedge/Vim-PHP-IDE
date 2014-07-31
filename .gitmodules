@@ -25,3 +25,6 @@
 [submodule "bundle/phpdocumentor"]
 	path = bundle/phpdocumentor
 	url = https://github.com/weedge/PDV-revised.git
+[submodule "colors"]
+	path = colors
+	url = https://github.com/weedge/Vim-PHP-IDE.git
