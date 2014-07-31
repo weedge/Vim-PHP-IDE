@@ -27,4 +27,4 @@
 	url = https://github.com/weedge/PDV-revised.git
 [submodule "colors"]
 	path = colors
-	url = https://github.com/weedge/Vim-PHP-IDE.git
+	url = https://github.com/weedge/vim-colorscheme.git
