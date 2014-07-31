@@ -1,5 +1,6 @@
 ## 修改
-去掉了两个插件的git子模块 tlib_vim、vim-addon-mw-utils (全部使用vundle来通过git子模块管理比较慢)
+去掉了两个插件的git子模块 tlib_vim、vim-addon-mw-utils 
+添加php-doc模块
 
 # Thomas Hunter's VIM Configuration
 
@@ -64,7 +65,7 @@ below. Feel free to open as many buffers as you want, as if this were a normal I
 * Use _s_ to reorder the items by alpha or occurance
 
 ### php documentor (php-doc)
-* 使用Ctrl p生成注释文档from:http://www.vim.org/scripts/script.php?script_id=1355 对此进行了一些修改,木有放git submodule里头管理了
+* 使用Ctrl p生成注释文档from:http://www.vim.org/scripts/script.php?script_id=1355 对此进行了一些修改,放入git submodule里头管理了
 
 
 ## Requirements
@@ -90,5 +91,5 @@ tweaking to get it working under Linux.
 
 ## Screenshots
 
-![Screenshot](http://thomashunter.name/pictures/macvim.png "Screenshot of MacVIM")
+![Screenshot](http://img3.douban.com/lpic/s24951823.jpg "Screenshot of MacVIM")
 
