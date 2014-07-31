@@ -22,3 +22,6 @@
 [submodule "bundle/vim-coffee-script"]
 	path = bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script
+[submodule "bundle/phpdocumentor"]
+	path = bundle/phpdocumentor
+	url = https://github.com/weedge/PDV-revised.git
