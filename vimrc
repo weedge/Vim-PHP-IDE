@@ -218,7 +218,7 @@ augroup ft_php
 	vnoremap <C-P> :call PhpDocRange()<CR> 
 
 	if filereadable(expand("$HOME/.vim/dict/php_funclist.txt"))
-		function! AddPHPFuncList() " Inspired by hawk (https://github.com/hawklim)
+		function! AddPHPFuncList() 
 			set dictionary-=$HOME/.vim/dict/php_funclist.txt dictionary+=$HOME/.vim/dict/php_funclist.txt
 			set complete-=k complete+=k
 		endfunction
