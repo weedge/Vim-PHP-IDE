@@ -9,6 +9,12 @@ set history=500
 autocmd BufWritePost .vimrc source $MYVIMRC
 " Fast edit the .vimrc file using ',x'
 nnoremap <Leader>x :tabedit $MYVIMRC<CR>
+" Fast edit the todo list file using ',d'
+nnoremap <Leader>d :tabedit $HOME/todo_list<CR>
+nnoremap <Leader>th :tabedit /etc/hosts<CR>
+nnoremap <Leader>nn :tabn<CR>
+nnoremap <Leader>pp :tabp<CR>
+nnoremap <Leader>tt :tabnew<CR>
 
 set autoread " Set autoread when a file is changed outside
 set autowrite " Write on make/shell commands

@@ -28,3 +28,6 @@
 [submodule "colors"]
 	path = colors
 	url = https://github.com/weedge/vim-colorscheme.git
+[submodule "bundle/gtags"]
+	path = bundle/gtags
+	url = https://github.com/vim-scripts/gtags.vim.git
