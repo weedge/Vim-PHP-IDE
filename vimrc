@@ -53,6 +53,7 @@ filetype plugin on          "Needed for snipMate
 set autoindent              "Autoindent
 set cursorline                  "Highlight background of current line
 nnoremap <Leader>vv :set mouse=v<CR>
+nnoremap <Leader>aa :set mouse=a<CR>
 "set expandtab               "Use spaces instead of tabs
 "Ignore these files when completing names
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,node_modules/*
@@ -307,6 +308,24 @@ nnoremap <silent>\b :colorscheme darkblue<CR>
 nnoremap <silent>\m :colorscheme Mustang<CR>
 nnoremap <silent>\s :colorscheme solarized<CR>
 nnoremap <silent>\i :colorscheme ir_black<CR>
+
+" ======= 引号 && 括号自动匹配 ======= "
+":inoremap ( ()<ESC>i
+":inoremap ) <c-r>=ClosePair(')')<CR>
+":inoremap { {}<ESC>i
+":inoremap } <c-r>=ClosePair('}')<CR>
+":inoremap [ []<ESC>i
+":inoremap ] <c-r>=ClosePair(']')<CR>
+":inoremap " ""<ESC>i
+":inoremap ' ''<ESC>i
+":inoremap ` ``<ESC>i
+"function ClosePair(char)
+"	if getline('.')[col('.')- 1] == a:char
+"		return "\<Right>"
+"	else
+"		return a:char
+"	endif
+"endf
 
 if has("gui_running")
     set cursorline                  "Highlight background of current line
